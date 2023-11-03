@@ -1642,37 +1642,6 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
---- !u!1 &877439167 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3923975831494755788, guid: 988a449e8bc505d44ab8a65eee392426, type: 3}
-  m_PrefabInstance: {fileID: 2208278876231993349}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &877439172
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 877439167}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ded792ee7ea62b64f876c9cc72ba4f34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsWall:
-    serializedVersion: 2
-    m_Bits: 64
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 64
-  wallRunForce: 200
-  wallClimbSpeed: 0
-  maxWallRunTime: 1.5
-  upwardsRunKey: 304
-  downwardsRunKey: 306
-  wallCheckDistance: 0.7
-  minJumpHeight: 2
-  orientation: {fileID: 2122434318}
 --- !u!43 &962949470
 Mesh:
   m_ObjectHideFlags: 0
@@ -5612,21 +5581,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 5255845778195953620, guid: 988a449e8bc505d44ab8a65eee392426, type: 3}
-      propertyPath: wallRuningSpeed
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 5255845778195953620, guid: 988a449e8bc505d44ab8a65eee392426, type: 3}
-      propertyPath: whatIsGround.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3923975831494755788, guid: 988a449e8bc505d44ab8a65eee392426, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 877439172}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 988a449e8bc505d44ab8a65eee392426, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
