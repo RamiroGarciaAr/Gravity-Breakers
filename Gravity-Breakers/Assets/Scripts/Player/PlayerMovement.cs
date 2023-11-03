@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public float sprintSpeed;
     public float groundDrag;
     public float slideSpeed;
+    public float wallRuningSpeed;
 
     private float desiredMoveSpeed;
     private float lastDesierdMoveSpeed;
@@ -25,7 +26,8 @@ public class PlayerMovement : MonoBehaviour
         sprinting,
         crouching,
         sliding,
-        air
+        air,
+        wallRunning
     }
 
     [Header("Jump")] public float jumpForce;
@@ -52,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isGrounded;
     private bool isOnPlatform;
+    public bool isWallRunning;
     public Transform orientation;
 
     [Header("Slope Handeling")] public float maxSlopeAngle;
@@ -111,6 +114,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void StateHandler()
     {
+        if (isWallRunning)
+        {
+            state = MovementState.wallRunning;
+            desiredMoveSpeed = wallRuningSpeed;
+        }
         if (sliding.isSliding)
         {
             state = MovementState.sliding;
