@@ -181,6 +181,7 @@ GameObject:
   - component: {fileID: 5255845778195953620}
   - component: {fileID: 540404270738174920}
   - component: {fileID: 8957802313474845815}
+  - component: {fileID: 4907432745098040774}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -222,6 +223,7 @@ MonoBehaviour:
   sprintSpeed: 11
   groundDrag: 5
   slideSpeed: 30
+  wallRuningSpeed: 60
   state: 0
   jumpForce: 7
   fallMultiplier: 2.5
@@ -236,7 +238,8 @@ MonoBehaviour:
   playerHeight: 1.5
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
+  isWallRunning: 0
   orientation: {fileID: 151680460204546771}
   maxSlopeAngle: 40
 --- !u!54 &540404270738174920
@@ -285,3 +288,29 @@ MonoBehaviour:
   slideYScale: 0.5
   slideKey: 306
   isSliding: 0
+--- !u!114 &4907432745098040774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3923975831494755788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ded792ee7ea62b64f876c9cc72ba4f34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 64
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 64
+  wallRunForce: 200
+  wallClimbSpeed: 0
+  maxWallRunTime: 1.5
+  upwardsRunKey: 304
+  downwardsRunKey: 306
+  wallCheckDistance: 0.7
+  minJumpHeight: 2
+  orientation: {fileID: 151680460204546771}
