@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -10,7 +11,7 @@ public class Climbing : MonoBehaviour
     public Transform orientation;
     public Rigidbody rb;
     public LayerMask whatIsWall;
-    
+    public PlayerMovement pm;
     
 
     [Header("Climbing")] 
@@ -30,9 +31,18 @@ public class Climbing : MonoBehaviour
     private RaycastHit frontWallHit;
     private bool hasWallInFront;
 
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+        pm = GetComponent<PlayerMovement>();
+    }
+
     private void Update()
     {
         wallCheck();
+        StateMachine();
+        
+        if (isClimbing) ClimbingMovement();
     }
 
     private void StateMachine()
@@ -53,6 +63,12 @@ public class Climbing : MonoBehaviour
     private void wallCheck()
     {
         hasWallInFront = Physics.SphereCast(transform.position,sphereCastRadius,orientation.forward,out frontWallHit,detectionLength,whatIsWall);
+        wallLookAngle = Vector3.Angle(orientation.forward, -frontWallHit.normal);
+
+        if (pm.GetIsGrounded())
+        {
+            climbTimer = maxClimbTime;
+        }
     }
 
     private void StartClimbing()

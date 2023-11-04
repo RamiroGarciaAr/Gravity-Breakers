@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Ground Check")] public float playerHeight;
     public LayerMask whatIsGround;
 
-    public bool isGrounded;
+    private bool isGrounded;
     private bool isOnPlatform;
     public bool isWallRunning;
     public Transform orientation;
@@ -113,6 +113,11 @@ public class PlayerMovement : MonoBehaviour
     {
         MovePlayer();
         StateHandler();
+    }
+
+    public bool GetIsGrounded()
+    {
+        return isGrounded;
     }
 
     private void StateHandler()
