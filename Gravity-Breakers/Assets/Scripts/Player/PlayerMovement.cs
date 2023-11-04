@@ -76,6 +76,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]private PlayerCamera _cam;
     public float strEffectJump = 0.3f;
     public float grappleFOV = 95f;
+    
+    [Header("Animation")]
+    public Animator anim;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -132,38 +135,55 @@ public class PlayerMovement : MonoBehaviour
             state = MovementState.freeze;
             moveSpeed = 0;
             rb.velocity = Vector3.zero;
+            anim.SetBool("isSprinting", false);
         }
 
         if (isWallRunning)
         {
             state = MovementState.wallRunning;
             desiredMoveSpeed = wallRuningSpeed;
+            anim.SetBool("isSprinting", true);
+
             
         }
         if (sliding.isSliding)
         {
+            anim.SetBool("isSprinting", false);
+
             state = MovementState.sliding;
             if (OnSlope() && rb.velocity.y < 0.1f)
                 desiredMoveSpeed = slideSpeed;
             else desiredMoveSpeed = sprintSpeed;
+            
         }
 
         if (isGrounded && Input.GetKey(sprintKey) && !Input.GetKey(crouchKey))
         {
+            anim.SetBool("isSprinting", true);
+
             state = MovementState.sprinting;
             desiredMoveSpeed = sprintSpeed;
         }
         else if (isGrounded && Input.GetKey(crouchKey) && !Input.GetKey(sprintKey))
         {
+            anim.SetBool("isSprinting", false);
+
             state = MovementState.crouching;
             desiredMoveSpeed = crouchSpeed;
         }
         else if (isGrounded)
         {
+            anim.SetBool("isSprinting", false);
+
             state = MovementState.walking;
             desiredMoveSpeed = walkSpeed;
         }
-        else state = MovementState.air;
+        else
+        {
+            anim.SetBool("isSprinting", false);
+
+            state = MovementState.air;
+        }
 
         if (Mathf.Abs(desiredMoveSpeed - lastDesierdMoveSpeed) > 4f && moveSpeed != 0)
         {
@@ -227,7 +247,7 @@ public class PlayerMovement : MonoBehaviour
     public void ResetRestrictions()
     {
         isGrappleActive = false;
-        _cam.DoFOV(85f);
+        _cam.DoFOV(80f);
     }
 
     private void OnCollisionEnter(Collision other)
