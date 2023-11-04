@@ -8,10 +8,12 @@ public class Turrets : MonoBehaviour
     public GameObject Bullet;
     public float bulletSpeed = 22f;
     public Transform gunBarrel;
+    public float rotSpeed = 10f;
 
     public KeyCode dmg = KeyCode.K;
     private void Start()
     {
+        Debug.Log("Start");
         stats.player = GameObject.FindGameObjectWithTag("Player");
         stats.hp = 100;
         //stats.dmg = 2;
@@ -23,7 +25,15 @@ public class Turrets : MonoBehaviour
     }
     private void Update()
     {
-        if(chase) Invoke(nameof(shootAtPlayer),2f);
+        if (chase)
+        {
+            Vector3 dir = transform.position - stats.player.transform.position;
+            Quaternion targetRotation = Quaternion.LookRotation(dir);
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotSpeed);
+            
+            Invoke(nameof(shootAtPlayer),2f);
+        }
         if(Input.GetKeyDown(dmg))
         {
             death();
@@ -39,9 +49,7 @@ public class Turrets : MonoBehaviour
         }
     }
 
-    private void shootAtPlayer()
-    {
-        gunBarrel.transform.LookAt(stats.player.transform);
+    private void shootAtPlayer(){
         
         if (!attacked)
         {

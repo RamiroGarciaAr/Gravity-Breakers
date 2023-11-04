@@ -54,9 +54,12 @@ public class Enemy : MonoBehaviour
                 stats.delta = new Vector3(playerPos.x - position1.x,
                         playerPos.y - position1.y,
                         playerPos.z - position1.z);
-                this.transform.LookAt(new Vector3(playerPos.x,
-                        playerPos.y,
-                        playerPos.z));
+                
+                Vector3 dir = transform.position - stats.player.transform.position;
+                Quaternion targetRotation = Quaternion.LookRotation(-dir);
+
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotSpeed);
+                
                 //Debug.Log(stats.delta);
                 Vector3 velocity = stats.delta.normalized * (stats.speed * Time.deltaTime);
 
@@ -73,11 +76,6 @@ public class Enemy : MonoBehaviour
 
         private void shootAtPlayer()
         {
-              transform.LookAt(stats.player.transform);
-              /*Vector3 dir = transform.position - stats.player.transform.position;
-              transform.rotation = Quaternion.Slerp(stats.player.transform.rotation, 
-                      Quaternion.LookRotation(dir),Time.deltaTime * rotSpeed);*/
-              
 
               if (!attacked)
               {
