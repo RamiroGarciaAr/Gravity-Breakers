@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -22,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
 
     public enum MovementState
     {
+        freeze,
         walking,
         sprinting,
         crouching,
@@ -32,8 +34,6 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Jump")] public float jumpForce;
     public float fallMultiplier = 2.5f;
-    public float strEffectJump = 0.3f;
-    public float strEffectSlide = 5;
     public int jumpCount = 2;
     public int jumpsLeft;
 
@@ -41,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
     public float normalAirMultiplier;
     private float airMultiplier;
     private bool readyToJump;
-
+    private bool enableMovementOnNextTouch;
     [Header("Crouch")] public float crouchSpeed;
     [FormerlySerializedAs("crouchYSpeed")] public float crouchYScale;
     private float startYScale;
@@ -55,6 +55,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isGrounded;
     private bool isOnPlatform;
+    public bool isFrozen;
+    public bool isGrappleActive;
     public bool isWallRunning;
     public Transform orientation;
 
@@ -69,13 +71,16 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody rb;
     private Rigidbody rbPlatform;
     private Sliding sliding;
-
-    [Header("References")] 
+    private GrapplingHook gh;
+    [Header("Camera Effects")] 
     [SerializeField]private PlayerCamera _cam;
+    public float strEffectJump = 0.3f;
+    public float grappleFOV = 95f;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         sliding = GetComponent<Sliding>();
+        gh = GetComponent<GrapplingHook>();
     }
 
     private void Start()
@@ -99,11 +104,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (rb.velocity.y < 0)
         {
-            rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+            rb.velocity += Vector3.up * (Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime);
         }
 
         // handle drag
-        if (isGrounded)
+        if (isGrounded && !isGrappleActive)
             rb.drag = groundDrag;
         else
             rb.drag = 0;
@@ -122,6 +127,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void StateHandler()
     {
+        if (isFrozen)
+        {
+            state = MovementState.freeze;
+            moveSpeed = 0;
+            rb.velocity = Vector3.zero;
+        }
+
         if (isWallRunning)
         {
             state = MovementState.wallRunning;
@@ -212,8 +224,22 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void ResetRestrictions()
+    {
+        isGrappleActive = false;
+        _cam.DoFOV(85f);
+    }
+
     private void OnCollisionEnter(Collision other)
     {
+        if (enableMovementOnNextTouch)
+        {
+            enableMovementOnNextTouch = false;
+            ResetRestrictions();
+            gh.StopGrapple();
+            
+        }
+
         if (other.gameObject.CompareTag("Platform"))
         {
             Debug.Log("Platform Enter");
@@ -237,6 +263,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
+        if (isGrappleActive) return;
         // calculate movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
@@ -309,6 +336,36 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 GetSlopeMoveDir(Vector3 dir)
     {
         return Vector3.ProjectOnPlane(dir, slopeHit.normal).normalized;
+    }
+
+    private Vector3 velocityToSet;
+    public void JumpToPosition(Vector3 targetPosition, float trayectoryHeight)
+    {
+        isGrappleActive = true;
+        velocityToSet = CalculateJumpVelocity(transform.position, targetPosition, trayectoryHeight);
+        Invoke(nameof(SetVelocity),0.1f);
+        Invoke(nameof(ResetRestrictions),4f);
+    }
+
+    private void SetVelocity()
+    {
+        _cam.DoFOV(grappleFOV);
+        enableMovementOnNextTouch = true;
+        rb.velocity = velocityToSet;
+    }
+    
+    public Vector3 CalculateJumpVelocity(Vector3 startPoint, Vector3 endPoint, float trayectoryHeight)
+    {
+        float gravity = Physics.gravity.y;
+        float displacementY = endPoint.y - startPoint.y;
+
+        Vector3 displacementeXZ = new Vector3(endPoint.x - startPoint.x, 0f, endPoint.z - startPoint.z);
+
+        Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * gravity * trayectoryHeight);
+        Vector3 velocityXZ = displacementeXZ / (Mathf.Sqrt(-2 * trayectoryHeight/gravity) + 
+                                                Mathf.Sqrt(2*(displacementY - trayectoryHeight)/gravity));
+
+        return velocityXZ + velocityY;
     }
     
 }
