@@ -32,7 +32,8 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Jump")] public float jumpForce;
     public float fallMultiplier = 2.5f;
-
+    public float strEffectJump = 0.3f;
+    public float strEffectSlide = 5;
     public int jumpCount = 2;
     public int jumpsLeft;
 
@@ -52,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Ground Check")] public float playerHeight;
     public LayerMask whatIsGround;
 
-    private bool isGrounded;
+    public bool isGrounded;
     private bool isOnPlatform;
     public bool isWallRunning;
     public Transform orientation;
@@ -65,10 +66,12 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 moveDirection;
 
-    Rigidbody rb;
+    public Rigidbody rb;
     private Rigidbody rbPlatform;
     private Sliding sliding;
 
+    [Header("References")] 
+    [SerializeField]private PlayerCamera _cam;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -116,7 +119,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isWallRunning)
         {
-            Debug.Log("WALL");
             state = MovementState.wallRunning;
             desiredMoveSpeed = wallRuningSpeed;
             
@@ -124,7 +126,6 @@ public class PlayerMovement : MonoBehaviour
         if (sliding.isSliding)
         {
             state = MovementState.sliding;
-
             if (OnSlope() && rb.velocity.y < 0.1f)
                 desiredMoveSpeed = slideSpeed;
             else desiredMoveSpeed = sprintSpeed;
@@ -240,7 +241,6 @@ public class PlayerMovement : MonoBehaviour
             ResetJump();
             airMultiplier = normalAirMultiplier;
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-            Debug.Log(moveSpeed);
             //Debug.Log("Grounded");
         }
 
@@ -279,10 +279,10 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         // reset y velocity
+        _cam.DoShakeY(strEffectJump);
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
         jumpsLeft--;
-        Debug.Log("Jumps:" + jumpsLeft);
     }
 
     public void ResetJump()

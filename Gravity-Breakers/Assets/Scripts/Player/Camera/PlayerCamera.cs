@@ -45,4 +45,10 @@ public class PlayerCamera : MonoBehaviour
     {
         transform.DOLocalRotate(new Vector3(0, 0, zTilt), 0.25f);
     }
+
+    public void DoShakeY(float strength)
+    {
+        _camera.DOShakeRotation(0.25f,new Vector3(strength,0f,0f),1,90f,true,ShakeRandomnessMode.Harmonic);
+    }
+    
 }

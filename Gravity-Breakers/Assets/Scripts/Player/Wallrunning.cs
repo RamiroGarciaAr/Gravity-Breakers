@@ -9,6 +9,7 @@ public class Wallrunning : MonoBehaviour
 [Header("Wallrunning")]
     public LayerMask whatIsWall;
     public LayerMask whatIsGround;
+    public float strEffect;
     public float wallRunForce;
     public float wallJumpUpForce;
     public float wallJumpSideForce;
@@ -95,7 +96,7 @@ public class Wallrunning : MonoBehaviour
             // wallrun timer
             if (wallRunTimer > 0)
                 wallRunTimer -= Time.deltaTime;
-
+            
             if(wallRunTimer <= 0 && pm.isWallRunning)
             {
                 exitingWall = true;
@@ -183,6 +184,7 @@ public class Wallrunning : MonoBehaviour
     private void WallJump()
     {
         // enter exiting wall state
+        cam.DoShakeY(strEffect);
         exitingWall = true;
         exitWallTimer = exitWallTime;
         pm.jumpsLeft++;
