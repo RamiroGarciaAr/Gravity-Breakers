@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05a8ab0fda81426b885cf6d6413094f0, type: 3}
   m_Name: FlyingEnemy
   m_EditorClassIdentifier: 
-  hp: 0
-  dmg: 0
-  speed: 0
-  threshold: 0
+  hp: 100
+  speed: 12
+  threshold: 7
   delta: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
+  timeToDestoy: 7
+  lambda: 2

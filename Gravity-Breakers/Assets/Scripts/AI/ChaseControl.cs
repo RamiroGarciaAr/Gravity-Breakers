@@ -5,7 +5,6 @@ public class ChaseControl : MonoBehaviour
 {
     public Enemy[] enemyArr;
     public Turrets[] turrArr;
-    public GameObject player;
 
     /*private void Start()
     {
@@ -17,7 +16,6 @@ public class ChaseControl : MonoBehaviour
         Debug.Log("Chase player");
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Chase PLayer numero 2");
             foreach (Enemy enemy in enemyArr)
             {
                 enemy.chase = true;

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 public class Turrets : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class Turrets : MonoBehaviour
     private void Start()
     {
         stats.player = GameObject.FindGameObjectWithTag("Player");
-        stats.hp = 10;
+        stats.hp = 100;
         //stats.dmg = 2;
     }
     
@@ -28,10 +29,19 @@ public class Turrets : MonoBehaviour
             death();
         }
     }
-    
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Bullet"))
+        {
+            Destroy(other.gameObject);
+            getHit();
+        }
+    }
+
     private void shootAtPlayer()
     {
-        transform.LookAt(stats.player.transform);
+        gunBarrel.transform.LookAt(stats.player.transform);
         
         if (!attacked)
         {
@@ -61,7 +71,7 @@ public class Turrets : MonoBehaviour
     private void getHit()
     {
         stats.hp -= 25f;
-        if (stats.hp == 0)
+        if (stats.hp <= 0)
         {
             death();
         }

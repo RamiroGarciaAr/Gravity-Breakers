@@ -11,18 +11,19 @@ public class Enemy : MonoBehaviour
         public GameObject Bullet;
         public float bulletSpeed = 22f;
         public Transform gunBarrel;
+        public float rotSpeed = 3f;
+
+        public EnemyHealth enemyHP;
+        
         
         public float amplitud = 2;
         public float speed = 1.5f;
-
+        
         public KeyCode dmg = KeyCode.K;
         private void Start()
         {
                 stats.player = GameObject.FindGameObjectWithTag("Player");
-                stats.speed = 7f;
-                stats.threshold = 7f;
-                stats.hp = 10;
-                //stats.dmg = 2;
+                
         }
 
         private void Update()
@@ -30,7 +31,7 @@ public class Enemy : MonoBehaviour
                 if(chase) Invoke(nameof(shootAtPlayer),2f);
                 if(Input.GetKeyDown(dmg))
                 {
-                        death();
+                        enemyHP.getHit(100f);
                 }
         }
 
@@ -73,7 +74,9 @@ public class Enemy : MonoBehaviour
         private void shootAtPlayer()
         {
               transform.LookAt(stats.player.transform);
-
+              /*Vector3 dir = transform.position - stats.player.transform.position;
+              transform.rotation = Quaternion.Slerp(stats.player.transform.rotation, 
+                      Quaternion.LookRotation(dir),Time.deltaTime * rotSpeed);*/
               
 
               if (!attacked)
@@ -87,11 +90,7 @@ public class Enemy : MonoBehaviour
                       Invoke(nameof(ResetAttack),3f);
               }
         }
-
-        public void death()
-        {
-                Destroy(gameObject);
-        }
+        
         public void ResetAttack()
         {
                 attacked = false;
@@ -102,16 +101,8 @@ public class Enemy : MonoBehaviour
                 if (other.gameObject.CompareTag("Bullet"))
                 {
                         Destroy(other.gameObject);
-                        getHit();
+                        enemyHP.getHit(25f);
                 }
         }
-
-        private void getHit()
-        {
-                stats.hp -= 25f;
-                if (stats.hp == 0)
-                {
-                        death();
-                }
-        }
+        
 }

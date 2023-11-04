@@ -1,13 +1,19 @@
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class RespawnScreen : MonoBehaviour
 {
+    public int timeing = 5;
+
+    public  TMP_Text textToDisplay;
     public void Setup()
     {
         gameObject.SetActive(true);
-        Invoke("RestartButton",2f);
+        textToDisplay.text ="Reset in" + timeing.ToString();
+        Invoke("RestartButton",timeing);
     }
 
     public void RestartButton()
