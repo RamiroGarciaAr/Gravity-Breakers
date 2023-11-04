@@ -1,26 +1,17 @@
 
 using UnityEngine;
 
-public class FlyingEnemy : Enemy
+public class FlyingEnemy : MonoBehaviour
 {
-        public float speed = 6f;
-        public Vector3 delta;
-        private GameObject player;
-        private float threshold = 3f;
+        public EnemyStats stats;
         public bool chase = false;
-
-        public override void doDmg()
-        {
-                
-        }
-        
-        public override void takeDmg()
-        {
-                
-        }
         private void Start()
         {
-                player = GameObject.FindGameObjectWithTag("Player");
+                stats.player = GameObject.FindGameObjectWithTag("Player");
+                stats.speed = 6f;
+                stats.threshold = 3f;
+                stats.hp = 10;
+                stats.dmg = 2;
         }
 
         
@@ -37,15 +28,15 @@ public class FlyingEnemy : Enemy
                
         private void Chase() 
         {
-                delta = new Vector3(player.transform.position.x - transform.position.x,
-                        player.transform.position.y - transform.position.y,
-                        player.transform.position.z - transform.position.z);
-                this.transform.LookAt(new Vector3(player.transform.position.x,
-                        player.transform.position.y,
-                        player.transform.position.z));
-                if (delta.magnitude > threshold)
+                stats.delta = new Vector3(stats.player.transform.position.x - transform.position.x,
+                        stats.player.transform.position.y - transform.position.y,
+                        stats.player.transform.position.z - transform.position.z);
+                this.transform.LookAt(new Vector3(stats.player.transform.position.x,
+                        stats.player.transform.position.y,
+                        stats.player.transform.position.z));
+                if (stats.delta.magnitude > stats.threshold)
                 {
-                        Vector3 velocity = delta.normalized * speed * Time.deltaTime;
+                        Vector3 velocity = stats.delta.normalized * stats.speed * Time.deltaTime;
                         this.transform.position = this.transform.position + velocity;
                 }
         }

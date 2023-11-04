@@ -1,0 +1,22 @@
+using UnityEngine;
+[CreateAssetMenu(fileName = "New Enemy",menuName = "EnemyStats")]
+public class EnemyStats : ScriptableObject
+{
+    public float hp;
+    public float dmg;
+    public float speed;
+    public float threshold;
+    public Vector3 delta;
+    public GameObject player;
+    
+
+    public void doDmg()
+    {
+        
+    }
+
+    public void takeDmg()
+    {
+        
+    }
+}
