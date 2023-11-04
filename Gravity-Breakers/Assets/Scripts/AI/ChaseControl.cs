@@ -1,4 +1,4 @@
-using System;
+
 using UnityEngine;
 public class ChaseControl : MonoBehaviour
 {
@@ -6,7 +6,6 @@ public class ChaseControl : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
         if (other.CompareTag("Player"))
         {
             Debug.Log("Chase PLayer");
