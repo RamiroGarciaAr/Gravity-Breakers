@@ -80,7 +80,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2766925448152896190}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -182,6 +182,9 @@ GameObject:
   - component: {fileID: 540404270738174920}
   - component: {fileID: 8957802313474845815}
   - component: {fileID: 4907432745098040774}
+  - component: {fileID: 696944992175108963}
+  - component: {fileID: 7021224322124550061}
+  - component: {fileID: 4722810684150609586}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -219,15 +222,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 574ed9ef6b932134f9c39643462c1456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 7
-  sprintSpeed: 11
+  walkSpeed: 5
+  sprintSpeed: 7
   groundDrag: 5
-  slideSpeed: 30
-  wallRuningSpeed: 60
+  slideSpeed: 15
+  wallRuningSpeed: 11
   state: 0
   jumpForce: 7
   fallMultiplier: 2.5
   jumpCount: 2
+  jumpsLeft: 0
   thrusterMultiplier: 0.3
   normalAirMultiplier: 0.1
   crouchSpeed: 5
@@ -239,9 +243,15 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  isFrozen: 0
+  isGrappleActive: 0
   isWallRunning: 0
   orientation: {fileID: 151680460204546771}
   maxSlopeAngle: 40
+  rb: {fileID: 0}
+  _cam: {fileID: 0}
+  strEffectJump: 2
+  grappleFOV: 95
 --- !u!54 &540404270738174920
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -302,15 +312,85 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
+  strEffect: 2
   wallRunForce: 200
-  wallClimbSpeed: 0
-  maxWallRunTime: 1.5
-  upwardsRunKey: 304
-  downwardsRunKey: 306
+  wallJumpUpForce: 3
+  wallJumpSideForce: 12
+  wallClimbSpeed: 0.7
+  maxWallRunTime: 0.7
+  jumpKey: 32
+  upwardsRunKey: 0
+  downwardsRunKey: 119
   wallCheckDistance: 0.7
   minJumpHeight: 2
+  exitWallTime: 0.2
+  useGravity: 0
+  gravityCounterForce: 100
   orientation: {fileID: 151680460204546771}
+  cam: {fileID: 0}
+--- !u!114 &696944992175108963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3923975831494755788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c5e8ccb0fbda8649a2d461d69b5392f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: {fileID: 151680460204546771}
+  rb: {fileID: 540404270738174920}
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 128
+  pm: {fileID: 5255845778195953620}
+  climbSpeed: 10
+  maxClimbTime: 0.75
+  detectionLength: 0.7
+  sphereCastRadius: 0.25
+  maxWallLookAngle: 30
+--- !u!114 &7021224322124550061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3923975831494755788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0343cfd194aa3b42822cafce4061273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 0}
+  gunTip: {fileID: 0}
+  whatIsGrappleable:
+    serializedVersion: 2
+    m_Bits: 192
+  lr: {fileID: 0}
+  maxGrappleDistance: 25
+  grappleDelayTime: 0.25
+  overshootYAxis: 2
+  grapplingCd: 1
+  grappleKey: 113
+--- !u!114 &4722810684150609586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3923975831494755788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 835994bd45ef2fe45815c72c5fe3a5f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dmg: 10
+  gunBarrel: {fileID: 0}
+  Bullet: {fileID: 5498129154219371590, guid: 571b6d9a7589aef41857ce9e0dc92ccb, type: 3}
+  bulletSpeed: 100
