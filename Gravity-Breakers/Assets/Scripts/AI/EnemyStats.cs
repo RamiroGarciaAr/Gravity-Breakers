@@ -9,15 +9,7 @@ public class EnemyStats : ScriptableObject
     public Vector3 delta;
     public GameObject player;
     public float timeToDestoy = 7f;
+    public float lambda = 2f;
     
-
-    public void doDmg()
-    {
-        
-    }
-
-    public void takeDmg()
-    {
-        
-    }
+    
 }

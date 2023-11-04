@@ -1,16 +1,18 @@
 
 using UnityEngine;
 
-public class FlyingEnemy : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
         public EnemyStats stats;
         public bool chase = false;
         //[SerializeField] private float time = 5f;
         private float bulletTime;
-        public float lambda = 2f;
         public bool attacked;
         public GameObject Bullet;
         public float bulletSpeed = 22f;
+        public Transform gunBarrel;
+
+        public KeyCode dmg = KeyCode.K;
         private void Start()
         {
                 stats.player = GameObject.FindGameObjectWithTag("Player");
@@ -23,6 +25,10 @@ public class FlyingEnemy : MonoBehaviour
         private void Update()
         {
                 if(chase) Invoke(nameof(shootAtPlayer),2f);
+                if(Input.GetKeyDown(dmg))
+                {
+                        death();
+                }
         }
 
         void LateUpdate()
@@ -50,7 +56,7 @@ public class FlyingEnemy : MonoBehaviour
                 //Debug.Log(stats.delta);
                 Vector3 velocity = stats.delta.normalized * (stats.speed * Time.deltaTime);
 
-                if ((stats.delta.magnitude - lambda) > stats.threshold)
+                if ((stats.delta.magnitude - stats.lambda) > stats.threshold)
                 {
                         this.transform.position += velocity;
                         //Debug.Log(velocity);
@@ -69,7 +75,7 @@ public class FlyingEnemy : MonoBehaviour
 
               if (!attacked)
               {
-                      Rigidbody rb = Instantiate(Bullet,transform.position,Quaternion.identity).GetComponent<Rigidbody>(); 
+                      Rigidbody rb = Instantiate(Bullet,gunBarrel.transform.position,Quaternion.identity).GetComponent<Rigidbody>(); 
                       rb.AddForce(transform.forward * bulletSpeed,ForceMode.Impulse); 
                       
                       Destroy(rb.gameObject,stats.timeToDestoy);
@@ -79,8 +85,30 @@ public class FlyingEnemy : MonoBehaviour
               }
         }
 
-        private void ResetAttack()
+        public void death()
+        {
+                Destroy(gameObject);
+        }
+        public void ResetAttack()
         {
                 attacked = false;
+        }
+        
+        private void OnTriggerEnter(Collider other)
+        {
+                if (other.gameObject.CompareTag("Bullet"))
+                {
+                        Destroy(other.gameObject);
+                        getHit();
+                }
+        }
+
+        private void getHit()
+        {
+                stats.hp -= 25f;
+                if (stats.hp == 0)
+                {
+                        death();
+                }
         }
 }
