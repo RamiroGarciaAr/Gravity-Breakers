@@ -8,6 +8,7 @@ public class EnemyStats : ScriptableObject
     public float threshold;
     public Vector3 delta;
     public GameObject player;
+    public float timeToDestoy = 7f;
     
 
     public void doDmg()

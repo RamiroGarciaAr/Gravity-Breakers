@@ -5,27 +5,31 @@ public class FlyingEnemy : MonoBehaviour
 {
         public EnemyStats stats;
         public bool chase = false;
-        [SerializeField] private float time = 5f;
+        //[SerializeField] private float time = 5f;
         private float bulletTime;
-        public GameObject enemyBullet;
-        public Transform spawnPoint;
+        public float lambda = 2f;
+        public bool attacked;
+        public GameObject Bullet;
         private void Start()
         {
                 stats.player = GameObject.FindGameObjectWithTag("Player");
                 stats.speed = 7f;
-                stats.threshold = 5f;
+                stats.threshold = 7f;
                 stats.hp = 10;
                 stats.dmg = 2;
         }
 
+        private void Update()
+        {
+                if(chase) Invoke(nameof(shootAtPlayer),2f);
+        }
 
-        void Update()
+        void LateUpdate()
         {
 
                 if (chase)
                 {
                         Chase();
-                        shootAtPlayer();
                        
                 }
         }
@@ -43,27 +47,39 @@ public class FlyingEnemy : MonoBehaviour
                         playerPos.y,
                         playerPos.z));
                 //Debug.Log(stats.delta);
-                if (stats.delta.magnitude > stats.threshold)
+                Vector3 velocity = stats.delta.normalized * (stats.speed * Time.deltaTime);
+
+                if ((stats.delta.magnitude - lambda) > stats.threshold)
                 {
-                        Vector3 velocity = stats.delta.normalized * (stats.speed * Time.deltaTime);
                         this.transform.position += velocity;
                         //Debug.Log(velocity);
+                }
+                else if(stats.delta.magnitude < stats.threshold)
+                {
+                        this.transform.position -= velocity;
                 }
         }
 
         private void shootAtPlayer()
         {
-                //Debug.Log("shooting");
-                bulletTime -= Time.deltaTime;
+              transform.LookAt(stats.player.transform);
 
-                if (bulletTime > 0) return;
+              
 
-                bulletTime = time;
+              if (!attacked)
+              {
+                      Rigidbody rb = Instantiate(Bullet,transform.position,Quaternion.identity).GetComponent<Rigidbody>(); 
+                      rb.AddForce(transform.forward * 32f,ForceMode.Impulse); 
+                      
+                      Destroy(rb.gameObject,stats.timeToDestoy);
 
-                GameObject bulletObj = Instantiate(enemyBullet,spawnPoint.transform.position,spawnPoint.transform.rotation) ;
-                var playerPos = stats.player.transform.position;
-                Rigidbody bulletRig = bulletObj.GetComponent<Rigidbody>();
-                bulletRig.AddForce(new Vector3(playerPos.x, playerPos.y, playerPos.z).normalized * stats.speed);
-                //Destroy(bulletObj,5f);
+                      attacked = true;
+                      Invoke(nameof(ResetAttack),3f);
+              }
+        }
+
+        private void ResetAttack()
+        {
+                attacked = false;
         }
 }
