@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
     public float fallMultiplier = 2.5f;
 
     public int jumpCount = 2;
-    private int jumpsLeft;
+    public int jumpsLeft;
 
     public float thrusterMultiplier = 0.3f;
     public float normalAirMultiplier;
@@ -116,8 +116,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isWallRunning)
         {
+            Debug.Log("WALL");
             state = MovementState.wallRunning;
             desiredMoveSpeed = wallRuningSpeed;
+            
         }
         if (sliding.isSliding)
         {
@@ -235,7 +237,7 @@ public class PlayerMovement : MonoBehaviour
         // on ground
         if (isGrounded)
         {
-            jumpsLeft = jumpCount;
+            ResetJump();
             airMultiplier = normalAirMultiplier;
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
             Debug.Log(moveSpeed);
@@ -281,6 +283,11 @@ public class PlayerMovement : MonoBehaviour
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
         jumpsLeft--;
         Debug.Log("Jumps:" + jumpsLeft);
+    }
+
+    public void ResetJump()
+    {
+        jumpsLeft = jumpCount;
     }
 
     public bool OnSlope()
