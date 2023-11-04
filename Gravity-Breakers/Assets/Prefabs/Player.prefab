@@ -252,6 +252,7 @@ MonoBehaviour:
   _cam: {fileID: 0}
   strEffectJump: 2
   grappleFOV: 95
+  anim: {fileID: 0}
 --- !u!54 &540404270738174920
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -390,7 +391,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 835994bd45ef2fe45815c72c5fe3a5f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmg: 10
-  gunBarrel: {fileID: 0}
+  dmg: 50
+  fpsCam: {fileID: 0}
   Bullet: {fileID: 5498129154219371590, guid: 571b6d9a7589aef41857ce9e0dc92ccb, type: 3}
-  bulletSpeed: 100
+  anim: {fileID: 0}
+  reloadKey: 114
