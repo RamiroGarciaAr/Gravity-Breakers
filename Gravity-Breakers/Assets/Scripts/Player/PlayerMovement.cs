@@ -310,5 +310,5 @@ public class PlayerMovement : MonoBehaviour
     {
         return Vector3.ProjectOnPlane(dir, slopeHit.normal).normalized;
     }
-
+    
 }
