@@ -10,8 +10,9 @@ public class Weapon : MonoBehaviour
     public Transform gunBarrel;
 
     public GameObject Bullet;
-
+    
     public float bulletSpeed;
+    public 
     // Update is called once per frame
     void Update()
     {
@@ -25,6 +26,6 @@ public class Weapon : MonoBehaviour
     {
         Debug.Log("Bang!!");
         Rigidbody rb = Instantiate(Bullet,gunBarrel.transform.position,Quaternion.identity).GetComponent<Rigidbody>(); 
-        rb.AddForce(transform.forward * bulletSpeed,ForceMode.Impulse);
+        rb.AddForce(gunBarrel.transform.forward * bulletSpeed,ForceMode.Impulse);
     }
 }
