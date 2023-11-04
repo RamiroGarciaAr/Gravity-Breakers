@@ -10,13 +10,14 @@ public class FlyingEnemy : MonoBehaviour
         public float lambda = 2f;
         public bool attacked;
         public GameObject Bullet;
+        public float bulletSpeed = 22f;
         private void Start()
         {
                 stats.player = GameObject.FindGameObjectWithTag("Player");
                 stats.speed = 7f;
                 stats.threshold = 7f;
                 stats.hp = 10;
-                stats.dmg = 2;
+                //stats.dmg = 2;
         }
 
         private void Update()
@@ -69,7 +70,7 @@ public class FlyingEnemy : MonoBehaviour
               if (!attacked)
               {
                       Rigidbody rb = Instantiate(Bullet,transform.position,Quaternion.identity).GetComponent<Rigidbody>(); 
-                      rb.AddForce(transform.forward * 32f,ForceMode.Impulse); 
+                      rb.AddForce(transform.forward * bulletSpeed,ForceMode.Impulse); 
                       
                       Destroy(rb.gameObject,stats.timeToDestoy);
 

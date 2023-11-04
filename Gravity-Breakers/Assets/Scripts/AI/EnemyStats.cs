@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyStats : ScriptableObject
 {
     public float hp;
-    public float dmg;
+    //public float dmg;
     public float speed;
     public float threshold;
     public Vector3 delta;
