@@ -11,6 +11,9 @@ public class Enemy : MonoBehaviour
         public GameObject Bullet;
         public float bulletSpeed = 22f;
         public Transform gunBarrel;
+        
+        public float amplitud = 2;
+        public float speed = 1.5f;
 
         public KeyCode dmg = KeyCode.K;
         private void Start()
