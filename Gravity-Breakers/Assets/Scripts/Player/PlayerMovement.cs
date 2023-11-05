@@ -95,6 +95,8 @@ public class PlayerMovement : MonoBehaviour
         jumpsLeft = jumpCount;
 
         startYScale = transform.localScale.y;
+        _cam = FindObjectOfType<PlayerCamera>();
+        am = FindObjectOfType<AudioManager>();
     }
 
 
@@ -102,10 +104,12 @@ public class PlayerMovement : MonoBehaviour
     {
         // ground check
         isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
-
+        
+        
         MyInput();
         SpeedControl();
-
+        if (Input.GetKey(crouchKey))
+            anim.SetBool("isSprinting", false);
         if (rb.velocity.y < 0)
         {
             rb.velocity += Vector3.up * (Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime);
@@ -145,7 +149,6 @@ public class PlayerMovement : MonoBehaviour
             desiredMoveSpeed = wallRuningSpeed;
             anim.SetBool("isSprinting", true);
 
-            
         }
         if (sliding.isSliding)
         {
@@ -161,21 +164,18 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded && Input.GetKey(sprintKey) && !Input.GetKey(crouchKey))
         {
             anim.SetBool("isSprinting", true);
-
             state = MovementState.sprinting;
             desiredMoveSpeed = sprintSpeed;
         }
         else if (isGrounded && Input.GetKey(crouchKey) && !Input.GetKey(sprintKey))
         {
-            anim.SetBool("isSprinting", false);
-
+            
             state = MovementState.crouching;
             desiredMoveSpeed = crouchSpeed;
         }
         else if (isGrounded)
         {
             anim.SetBool("isSprinting", false);
-
             state = MovementState.walking;
             desiredMoveSpeed = walkSpeed;
         }

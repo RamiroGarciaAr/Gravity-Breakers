@@ -186,7 +186,8 @@ GameObject:
   - component: {fileID: 7021224322124550061}
   - component: {fileID: 4722810684150609586}
   - component: {fileID: 5012336371352625989}
-  - component: {fileID: 6498221453350497144}
+  - component: {fileID: 7230134630122425081}
+  - component: {fileID: 1626958268711486500}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -255,6 +256,7 @@ MonoBehaviour:
   strEffectJump: 2
   grappleFOV: 95
   anim: {fileID: 0}
+  am: {fileID: 0}
 --- !u!54 &540404270738174920
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -393,9 +395,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 835994bd45ef2fe45815c72c5fe3a5f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunBarrel: {fileID: 0}
-  bulletSpeed: 0
   fpsCam: {fileID: 0}
+  am: {fileID: 0}
   dmg: 25
   maxAmmo: 10
   reloadTime: 1.9
@@ -421,7 +422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed3ea3899c21d874f92ac5809fe19d56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lr: {fileID: 6498221453350497144}
+  lr: {fileID: 0}
   grapplingGun: {fileID: 7021224322124550061}
   quality: 500
   damper: 14
@@ -453,7 +454,51 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!120 &6498221453350497144
+--- !u!114 &7230134630122425081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3923975831494755788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed3ea3899c21d874f92ac5809fe19d56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lr: {fileID: 1626958268711486500}
+  grapplingGun: {fileID: 7021224322124550061}
+  quality: 500
+  damper: 14
+  strength: 800
+  velocity: 15
+  waveCount: 3
+  waveHeight: 1
+  affectCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 3.5723772
+      outSlope: 3.5723772
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.048854947
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!120 &1626958268711486500
 LineRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
