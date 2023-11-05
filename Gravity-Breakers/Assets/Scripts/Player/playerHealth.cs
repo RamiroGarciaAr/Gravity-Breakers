@@ -14,10 +14,11 @@ public class playerHealth : MonoBehaviour
 
     private void getHit()
     {
+        Debug.Log("ouch");
         health -= 25f;
         if (health == 0)
         {
-            FindObjectOfType<GameManagerS1>().GameOver();
+            FindObjectOfType<GameManager>().GameOver();
         }
     }
 }
