@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d213f276-8038-4e87-a1e5-0c961f6300c5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/enemyHealth.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/enemyHealth.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerMovement.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

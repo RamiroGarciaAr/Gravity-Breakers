@@ -79,6 +79,7 @@ public class PlayerMovement : MonoBehaviour
     
     [Header("Animation")]
     public Animator anim;
+    public AudioManager am;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -331,6 +332,7 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         // reset y velocity
+        am.PlaySingle("Jump");
         _cam.DoShakeY(strEffectJump);
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
