@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class RespawnScreen : MonoBehaviour
 {
@@ -19,6 +19,6 @@ public class RespawnScreen : MonoBehaviour
     public void Quit()
     {
         Debug.Log("Quitting");
-        //SceneManager.LoadScene("HomeScreen");
+        SceneManager.LoadScene("HomeScreen");
     }
 }
