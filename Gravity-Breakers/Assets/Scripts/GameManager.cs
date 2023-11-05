@@ -1,12 +1,11 @@
 
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class GameManagerS1 : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     private bool gotGameOver = false;
 
-    public float restartDelay = 1f;
+    public float restartDelay = 0.4f;
     
     public  RespawnScreen respScreen;
     

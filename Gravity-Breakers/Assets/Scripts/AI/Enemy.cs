@@ -4,8 +4,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
         public EnemyStats stats;
-        public bool chase = false;
-        //[SerializeField] private float time = 5f;
+        public bool chase;
         private float bulletTime;
         public bool attacked;
         public GameObject Bullet;
@@ -28,7 +27,11 @@ public class Enemy : MonoBehaviour
 
         private void Update()
         {
-                if(chase) Invoke(nameof(shootAtPlayer),2f);
+                if (chase)
+                {
+                        Debug.Log("Chase");
+                        Invoke(nameof(shootAtPlayer),2f);
+                }
                 if(Input.GetKeyDown(dmg))
                 {
                         enemyHP.getHit(100f);
