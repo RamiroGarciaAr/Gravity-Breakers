@@ -8,10 +8,9 @@ using System.Collections;
 public class Weapon : MonoBehaviour
 {
     [Header("References")]
-    public Transform gunBarrel;
-    public float bulletSpeed;
     public Camera fpsCam;
-
+    public AudioManager am;
+    
     [Header("Weapon Stats")]
     public float dmg = 10;
     public int maxAmmo = 10;
@@ -50,8 +49,7 @@ public class Weapon : MonoBehaviour
         {
             StartCoroutine(Reload());
         }
-      //  if (Input.GetKeyUp(reloadKey))
-       //     anim.SetBool("isReloading",false);
+
         
         if (currentAmmo <= 0f)
         {
@@ -61,7 +59,7 @@ public class Weapon : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1") && Time.time >= nextTimeToFire)
         {
-            Debug.Log("BANG");
+            am.PlayCollection("WeaponFire");
             nextTimeToFire = Time.time + 1f / fireRate;
             Shoot();
             anim.SetBool("isShooting", true);
@@ -94,6 +92,7 @@ public class Weapon : MonoBehaviour
             {
                 
                 hitMarker.gameObject.SetActive(true);
+                am.PlaySingle("Hitmarker");
                 Invoke(nameof(ResetHitMarker),0.1f);
                 EnemyHealth hp = hit.transform.gameObject.GetComponent<EnemyHealth>();
                 hp.getHit(dmg);

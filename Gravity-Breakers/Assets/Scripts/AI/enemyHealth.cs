@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
+    public AudioManager am;
     private float health = 100f;
 
     public EnemyStats status;
     private Animator anim;
     private float duration = 0.12f;
-    public ParticleSystem explosion;
+    public GameObject explosion;
     public void Awake()
     {
         anim = GetComponent<Animator>();
@@ -29,14 +30,17 @@ public class EnemyHealth : MonoBehaviour
     }
     private void death()
     {
+        am.PlaySingle("Explotion");
+
+        Instantiate(explosion);
         Destroy(gameObject);
-        explosion.Play();
     }
     public void getHit(float dmg)
     {
         anim.SetBool("takenDmg",true);
         Invoke(nameof(DisableAnim),duration);
         health -= dmg;
+        
         if (health == 0)
         {
             death();

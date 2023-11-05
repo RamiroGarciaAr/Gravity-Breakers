@@ -18,7 +18,6 @@ public class HoverAnimation : MonoBehaviour
         Vector3 p = transform.position;
         if (Physics.Raycast(transform.position,Vector3.down,rayDistance,whatIsGround))
         {
-            Debug.Log("Found");
             p.y = (amplitud * Mathf.Pow(Mathf.Cos(Time.time * speed),2 )) + range;
         }
         else
