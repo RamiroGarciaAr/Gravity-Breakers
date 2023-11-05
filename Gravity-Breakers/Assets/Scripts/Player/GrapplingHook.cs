@@ -32,6 +32,7 @@ public class GrapplingHook : MonoBehaviour
     private void Start()
     {
         pm = GetComponent<PlayerMovement>();
+        cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
     }
 
     private void Update()

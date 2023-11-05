@@ -39,6 +39,8 @@ public class Weapon : MonoBehaviour
     {
         if (currentAmmo == -1)
             currentAmmo = maxAmmo;
+
+        //fpsCam = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
     void Update()
@@ -72,6 +74,7 @@ public class Weapon : MonoBehaviour
 
     IEnumerator Reload()
     {
+        am.PlaySingle("Reload");
         anim.SetBool("isReloading",true);
         yield return new WaitForSeconds(reloadTime);
         
@@ -100,8 +103,7 @@ public class Weapon : MonoBehaviour
             }
 
             var impact =Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
-            impact.GetComponent<hitParticles>().sparklyWine();
-            
+
             Destroy(impact,2f);
         }
     

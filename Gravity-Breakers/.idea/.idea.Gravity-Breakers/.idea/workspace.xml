@@ -5,7 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d213f276-8038-4e87-a1e5-0c961f6300c5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Gravity-Breakers/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Gravity-Breakers/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/enemyHealth.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/enemyHealth.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/GrapplingHook.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/GrapplingHook.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/Wallrunning.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/Wallrunning.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/Weapon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/Weapon.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/SpeedUI.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/SpeedUI.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,6 +115,7 @@
       <workItem from="1699029537772" duration="601000" />
       <workItem from="1699036003364" duration="2753000" />
       <workItem from="1699039868377" duration="5869000" />
+      <workItem from="1699186819956" duration="1502000" />
     </task>
     <servers />
   </component>

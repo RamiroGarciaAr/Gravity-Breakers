@@ -53,6 +53,9 @@ public class Wallrunning : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         pm = GetComponent<PlayerMovement>();
+
+        cam = FindObjectOfType<PlayerCamera>();
+
     }
 
     private void Update()

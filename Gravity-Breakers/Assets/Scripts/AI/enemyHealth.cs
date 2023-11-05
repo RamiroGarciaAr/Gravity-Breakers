@@ -37,8 +37,6 @@ public class EnemyHealth : MonoBehaviour
     }
     public void getHit(float dmg)
     {
-        anim.SetBool("takenDmg",true);
-        Invoke(nameof(DisableAnim),duration);
         health -= dmg;
         
         if (health == 0)
@@ -46,9 +44,5 @@ public class EnemyHealth : MonoBehaviour
             death();
         }
     }
-
-    private void DisableAnim()
-    {
-        anim.SetBool("takenDmg",false);
-    }
+    
 }
