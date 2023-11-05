@@ -627,7 +627,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3867064484325651216, guid: 5fa3701fd8911064d8b766bb5c697652, type: 3}
       propertyPath: m_text
-      value: Gravity-Breakers!
+      value: 'CONGRATS!
+
+        YOU WON'
       objectReference: {fileID: 0}
     - target: {fileID: 3867064484325651216, guid: 5fa3701fd8911064d8b766bb5c697652, type: 3}
       propertyPath: m_margin.x
@@ -655,7 +657,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5898831073106545897, guid: 5fa3701fd8911064d8b766bb5c697652, type: 3}
       propertyPath: m_Name
-      value: HomeScreen
+      value: WinScreen
       objectReference: {fileID: 0}
     - target: {fileID: 5898831073106545897, guid: 5fa3701fd8911064d8b766bb5c697652, type: 3}
       propertyPath: m_IsActive

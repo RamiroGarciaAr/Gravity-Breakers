@@ -19,11 +19,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void Restart()
+   /* public void Restart()
     {   
         respScreen.Setup();
     }
-    /*public void Restart(Scene lastScene)
+    public void Restart(Scene lastScene)
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }*/
