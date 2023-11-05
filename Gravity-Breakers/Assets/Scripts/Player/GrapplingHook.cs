@@ -44,8 +44,8 @@ public class GrapplingHook : MonoBehaviour
 
     private void LateUpdate()
     {
-         if (grappling)
-            lr.SetPosition(0, gunTip.position);
+        // if (grappling)
+           // lr.SetPosition(0, gunTip.position);
     }
 
     private void StartGrapple()
@@ -70,8 +70,8 @@ public class GrapplingHook : MonoBehaviour
             Invoke(nameof(StopGrapple), grappleDelayTime);
         }
 
-        lr.enabled = true;
-        lr.SetPosition(1, grapplePoint);
+        //lr.enabled = true;
+        //lr.SetPosition(1, grapplePoint);
     }
 
     private void ExecuteGrapple()
