@@ -8,6 +8,7 @@ public class EnemyHealth : MonoBehaviour
     public EnemyStats status;
     private Animator anim;
     private float duration = 0.12f;
+    public ParticleSystem explosion;
     public void Awake()
     {
         anim = GetComponent<Animator>();
@@ -29,6 +30,7 @@ public class EnemyHealth : MonoBehaviour
     private void death()
     {
         Destroy(gameObject);
+        explosion.Play();
     }
     public void getHit(float dmg)
     {

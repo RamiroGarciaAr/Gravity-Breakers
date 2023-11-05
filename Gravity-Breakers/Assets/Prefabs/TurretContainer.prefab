@@ -320,6 +320,7 @@ GameObject:
   - component: {fileID: 4160352830734418875}
   - component: {fileID: 2539735696011909876}
   - component: {fileID: 944903219877005563}
+  - component: {fileID: 7844911259785616587}
   m_Layer: 0
   m_Name: TurretContainer
   m_TagString: Untagged
@@ -412,3 +413,17 @@ MonoBehaviour:
   gunBarrel: {fileID: 4204003723670266019}
   rotSpeed: 2
   dmg: 107
+--- !u!114 &7844911259785616587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8147734987965729859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e74da86f48d046a6adf7b00e9717bde8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  status: {fileID: 0}
+  explosion: {fileID: 6634807021056185988, guid: 0166df83b280361409e7f81878d855d5, type: 3}

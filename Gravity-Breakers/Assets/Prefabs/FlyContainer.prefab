@@ -336,6 +336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   status: {fileID: 11400000, guid: 903f722dba9407e46adf26f35829b477, type: 2}
+  explosion: {fileID: 6634807021056185988, guid: 0166df83b280361409e7f81878d855d5, type: 3}
 --- !u!114 &951206009023598110
 MonoBehaviour:
   m_ObjectHideFlags: 0
