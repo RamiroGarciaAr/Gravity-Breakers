@@ -32,8 +32,8 @@ public class EnemyHealth : MonoBehaviour
     {
         am.PlaySingle("Explotion");
 
-        Instantiate(explosion);
-        gameObject.SetActive(false);
+        Instantiate(explosion,transform);
+        Destroy(gameObject);
     }
     public void getHit(float dmg)
     {

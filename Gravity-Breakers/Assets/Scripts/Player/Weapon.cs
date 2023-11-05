@@ -102,8 +102,20 @@ public class Weapon : MonoBehaviour
                 
             }
 
-            var impact =Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
+            if (hit.transform.gameObject.CompareTag("Button"))
+            {
+                hitMarker.gameObject.SetActive(true);
+                am.PlaySingle("Hitmarker");
+                Invoke(nameof(ResetHitMarker),0.1f);
 
+                Button butt = hit.transform.gameObject.GetComponent<Button>();
+                butt.open = true;
+                
+                butt.gameObject.SetActive(false);
+            }
+
+
+            var impact =Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
             Destroy(impact,2f);
         }
     

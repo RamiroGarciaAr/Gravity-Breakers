@@ -1,8 +1,19 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class playerHealth : MonoBehaviour
 {
     public float health = 100f;
+    public Transform start;
+    private void Update()
+    {
+        if (health <= 0)
+        {
+            FindObjectOfType<GameManager>().GameOver();
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Bullet"))
@@ -16,9 +27,5 @@ public class playerHealth : MonoBehaviour
     {
         Debug.Log("ouch");
         health -= 25f;
-        if (health == 0)
-        {
-            FindObjectOfType<GameManager>().GameOver();
-        }
     }
 }

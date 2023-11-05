@@ -1,6 +1,6 @@
 
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private bool gotGameOver = false;
@@ -19,12 +19,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-   /* public void Restart()
+    public void Restart()
     {   
-        respScreen.Setup();
-    }
-    public void Restart(Scene lastScene)
-    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }*/
+    }
+
 }
