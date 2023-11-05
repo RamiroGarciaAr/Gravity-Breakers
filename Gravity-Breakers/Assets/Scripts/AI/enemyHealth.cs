@@ -3,9 +3,15 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-   private float health = 100f;
+    private float health = 100f;
 
     public EnemyStats status;
+    private Animator anim;
+    private float duration = 0.12f;
+    public void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
 
     public void Start()
     {
@@ -26,10 +32,17 @@ public class EnemyHealth : MonoBehaviour
     }
     public void getHit(float dmg)
     {
+        anim.SetBool("takenDmg",true);
+        Invoke(nameof(DisableAnim),duration);
         health -= dmg;
         if (health == 0)
         {
             death();
         }
+    }
+
+    private void DisableAnim()
+    {
+        anim.SetBool("takenDmg",false);
     }
 }
